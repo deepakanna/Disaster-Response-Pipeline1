@@ -4,6 +4,15 @@ import numpy as np
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    '''
+    load_data
+    Load data from csv files and merge to a single pandas dataframe
+    Input:
+    message_filepath file path to messages csv file
+    categories_filepath filepath to categories csv file
+    returns:
+    df dataframe merging categories and messages
+    '''
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
     #messages.head()
@@ -41,6 +50,15 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    '''
+    clean_data
+    Check for duplicates in the dataframe 
+    Remove the duplicates using drop method
+    Input:
+    DataFrame df
+    Returns:
+    Dataframe with no duplicates
+    '''
     # check number of duplicates
     df[df.duplicated()]
     # drop duplicates
@@ -51,6 +69,14 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    '''
+    save_data
+    save data as an sql file
+    Input:
+    DataFrame df
+    Returns:
+    Dataframe is saved as SQLite database
+    '''
     engine = create_engine('sqlite:///'+database_filename)
     df.to_sql('DisasterResponse', engine, index=False)
 
