@@ -37,6 +37,7 @@ def load_data(messages_filepath, categories_filepath):
         categories[column].astype(str)
         categories[column] = categories[column].str.split('-', expand=True)[1]
     categories = categories.astype(int)
+    categories.replace(2,1,inplace=True)
     #categories.dtypes
     # drop the original categories column from `df`
 
