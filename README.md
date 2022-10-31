@@ -1,6 +1,6 @@
 # Disaster Response Pipeline Project
 ## Project Description:
-This project aims to analyse the disaster data from Figure Eight and to build a model that classifies the messages into specific categories during disaster. The dataset contains 30000 messages obtained from an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, superstorm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. The specific categories are 36 namely medical_help,child_alone,death, missing_people, floods etc. This helps the emergency organizations to help the needy during a disaster. This project involves building an ETL pipeline that facilitates Extraction, Transformation and loading the disaster data, followed by a Machine Learning pipeline where a pipeline is designed using CountVectorizer, TfidfTransformer and a Multioutputclassifier is used. A Web app is developed that gives the classification output for an input message. 
+This project aims to analyse the disaster data from Figure Eight and to build a model that classifies the messages into specific categories during disaster. The dataset contains 30000 twitter messages obtained from an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, superstorm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. The specific categories are 36 namely medical_help,child_alone,death, missing_people, floods etc. The project aims at developing a Natural Language processing tool that categorizes the messages. This project involves building an ETL pipeline that facilitates Extraction, Transformation and loading the disaster data, followed by a Machine Learning pipeline. A Web app is developed that gives the classification output for an input message. The classification output helps the emergency organizations to help the needy during a disaster. The emergency team can be informed immediately and the people affected during any disaster can be assisted. 
 
 ## Project Sections:
 1. ETL Pipeline:
@@ -14,6 +14,25 @@ This project aims to analyse the disaster data from Figure Eight and to build a 
 5. Web Development:
     - Design using HTML
     - Build Web application using Flask
+
+## File Structure
+- app
+  - template
+  - master.html  # main page of web app
+  - go.html  # classification result page of web app
+  - run.py  # Flask file that runs app
+
+- data
+  - disaster_categories.csv  # data to process 
+  - disaster_messages.csv  # data to process
+  - process_data.py
+  - InsertDatabaseName.db   # database to save clean data to
+
+- models
+  - train_classifier.py
+  - classifier.pkl  # saved model 
+
+- README.md
 
 ## Requirements:
 This project requires Python 3 with pandas, numpy, sklearn, plotly, nltk, sqlalchemy, pickle installed.
