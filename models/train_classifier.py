@@ -27,6 +27,17 @@ nltk.download('wordnet')
 from sklearn.model_selection import GridSearchCV
 
 def load_data(database_filepath):
+    '''
+    load_data:
+    Load the data from SQLite database
+    Split the data into feature and target variables
+        
+    Input:
+    The filepath of the database file
+    
+    Returns:
+    The feature,target variables and the column names of the target variable
+    '''
     # load data from database
     engine = create_engine('sqlite:///'+database_filepath)
     df = pd.read_sql_table('DisasterResponse', engine)
@@ -37,6 +48,16 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    '''
+    tokenize:
+    Tokenization function to process the text data
+        
+    Input:
+    Text data
+    
+    Returns:
+    Clean processed data
+    '''
     text = text.lower()
     text = re.sub(r'[^a-zA-Z0-9]', " ", text)
     tokens = word_tokenize(text)
@@ -50,6 +71,13 @@ def tokenize(text):
 
 
 def build_model():
+    '''
+    build_model:
+    Build a machine learning pipeline and uses GridSearch to determines the best parameters 
+        
+    Returns
+    Grid Search object
+    '''
     pipeline = Pipeline([('vect', CountVectorizer(tokenizer=tokenize)), ('tfidf', TfidfTransformer()),
                          ('clf', MultiOutputClassifier(RandomForestClassifier()))])
     #parameters = {'clf__estimator__criterion': ['gini', 'entropy']}
@@ -58,6 +86,15 @@ def build_model():
     return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''
+    evaluate_model:
+    The built model is tested for the test data
+        
+    Input:
+    The built model, the test feature, test target variable and the column names of the target variable
+    The classification report for all the categories are displayed  
+    
+    '''
     #model.fit(X_train, y_train)
     #model.predict(X_test)
     #print(model.best_params_)
@@ -70,6 +107,14 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    '''
+    save_model:
+    The built model is exported as a pickle file
+        
+    Input:
+    The model and the filepath of the pickle file
+    
+    '''
     with open(model_filepath,'wb')as f:
         pickle.dump(model,f)
 
